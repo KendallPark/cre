@@ -1,0 +1,20 @@
+/*
+*  require nothing
+*/
+
+// Import sprockets
+@import "bootstrap-sprockets";
+
+// Import cerulean variables
+@import "bootswatch/darkly/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+
+// Bootstrap body padding for fixed navbar
+body { padding-top: 60px; }
+
+// And finally bootswatch style itself
+@import "bootswatch/darkly/bootswatch";
+
+@import "base";

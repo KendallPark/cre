@@ -1,0 +1,22 @@
+object {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+input.search-everything {
+    width: 250px !important;
+}
+
+.make-clear {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.on-top {
+  z-index: 1;
+}
