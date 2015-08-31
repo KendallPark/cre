@@ -19,19 +19,26 @@ Table = ReactBootstrap.Table
 
   getUpToDateUrl: ->
     query = @state.query.replace(" ", "+")
-    url = "//www.uptodate.com/contents/search?search=#{query}"
+    rootUrl = "//www.uptodate.com"
+    rootUrl = "//library.muhealth.org/mainSearch/UpToDate/UTD_IPcheck.php" if @props.off_campus and query is ""
+    url = "#{rootUrl}/contents/search?search=#{query}"
+    url = rootUrl if query is ""
     url
 
   getClinicalKeyUrl: ->
     query = @state.query.replace(" ", "%2520")
-    url = "//www.clinicalkey.com/#!/search/#{query}"
-    url = "//www.clinicalkey.com/" if query is ""
+    rootUrl = "//www.clinicalkey.com"
+    rootUrl = "//proxy.mul.missouri.edu/login?url=http://www.clinicalkey.com" if @props.off_campus
+    url = "#{rootUrl}/#!/search/#{query}"
+    url = rootUrl if query is ""
     url
 
   getAccessMedUrl: ->
     query = @state.query.replace(" ", "+")
-    url = "//accessmedicine.mhmedical.com/SearchResults.aspx?q=#{query}"
-    url = "//accessmedicine.mhmedical.com/" if query is ""
+    rootUrl = "//accessmedicine.mhmedical.com"
+    rootUrl = "//proxy.mul.missouri.edu/login?url=http://accessmedicine.mhmedical.com" if @props.off_campus
+    url = "#{rootUrl}/SearchResults.aspx?q=#{query}"
+    url = rootUrl if query is ""
     url
 
   getWikipediaUrl: ->
