@@ -1,4 +1,4 @@
-#= require ../search_store
+#= require ./search_store
 @SearchResults = React.createClass
   displayName: "SearchResults"
   mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("SearchStore")]

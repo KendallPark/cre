@@ -1,4 +1,4 @@
-#= require ../search_store
+#= require ./search_store
 @CRENavbar = React.createClass
   displayName: "Navbar"
   mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("SearchStore")]
