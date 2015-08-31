@@ -12,25 +12,25 @@
 
   getUpToDateUrl: ->
     query = @state.query.replace(" ", "+")
-    url = "https://www.uptodate.com/contents/search?search=#{query}"
+    url = "//www.uptodate.com/contents/search?search=#{query}"
     url
 
   getClinicalKeyUrl: ->
     query = @state.query.replace(" ", "%2520")
-    url = "http://www.clinicalkey.com/#!/search/#{query}"
-    url = "http://www.clinicalkey.com/" if query is ""
+    url = "//www.clinicalkey.com/#!/search/#{query}"
+    url = "//www.clinicalkey.com/" if query is ""
     url
 
   getAccessMedUrl: ->
     query = @state.query.replace(" ", "+")
-    url = "http://accessmedicine.mhmedical.com.proxy.mul.missouri.edu/SearchResults.aspx?q=#{query}"
-    url = "http://accessmedicine.mhmedical.com.proxy.mul.missouri.edu/" if query is ""
+    url = "//accessmedicine.mhmedical.com/SearchResults.aspx?q=#{query}"
+    url = "//accessmedicine.mhmedical.com/" if query is ""
     url
 
   getWikipediaUrl: ->
     query = @state.query.replace(" ", "+")
-    url = "https://en.wikipedia.org/wiki/Special:Search?search=#{query}&go=Go"
-    url = "https://www.wikipedia.org/" if query is ""
+    url = "//en.wikipedia.org/wiki/Special:Search?search=#{query}&go=Go"
+    url = "//www.wikipedia.org/" if query is ""
     url
 
   render: ->
