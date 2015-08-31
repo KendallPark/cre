@@ -17,7 +17,7 @@
 
   getClinicalKeyUrl: ->
     query = @state.query.replace(" ", "%2520")
-    url = "https://www.clinicalkey.com//#!/search/#{query}"
+    url = "https://www.clinicalkey.com/#!/search/#{query}"
     url = "https://www.clinicalkey.com/" if query is ""
     url
 
