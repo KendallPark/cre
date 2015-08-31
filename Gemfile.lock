@@ -142,7 +142,12 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.3)
       sprockets-rails
+    rails-assets-classnames (1.2.2)
     rails-assets-fluxxor (1.7.1)
+    rails-assets-react-input-autosize (0.4.5)
+    rails-assets-react-select (0.6.2)
+      rails-assets-classnames (>= 1.2.2, < 2)
+      rails-assets-react-input-autosize (>= 0.4.3, < 0.5)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -244,7 +249,10 @@ DEPENDENCIES
   pry-stack_explorer
   puma
   rails (= 4.2.3)
+  rails-assets-classnames!
   rails-assets-fluxxor!
+  rails-assets-react-input-autosize!
+  rails-assets-react-select!
   rails_12factor
   react-bootstrap-rails
   react-rails (~> 1.0)

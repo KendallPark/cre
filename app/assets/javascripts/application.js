@@ -17,5 +17,9 @@
 //= require react_ujs
 //= require react_bootstrap
 //= require fluxxor
+//= require lodash
+//= require classnames
+//= require react-input-autosize
+//= require react-select
 //= require components
 //= require_tree .

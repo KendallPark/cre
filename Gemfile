@@ -39,6 +39,9 @@ gem 'font-awesome-sass', '~> 4.3.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-fluxxor'
+  gem 'rails-assets-classnames'
+  gem 'rails-assets-react-input-autosize'
+  gem 'rails-assets-react-select'
 end
 
 group :test do

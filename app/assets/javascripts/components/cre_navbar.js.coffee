@@ -24,6 +24,7 @@
         <NavItem eventKey={1} href='#'>ClinicalKey</NavItem>
         <NavItem eventKey={2} href='#'>AccessMedicine</NavItem>
         <NavItem eventKey={3} href='#'>Wikipedia</NavItem>
+        <NavItem eventKey={4} href='#'>Labs</NavItem>
       </Nav>
       <Nav right>
         <SearchEverything />
