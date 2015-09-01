@@ -47,6 +47,13 @@ Table = ReactBootstrap.Table
     url = "//www.wikipedia.org/" if query is ""
     url
 
+  getPubMedUrl: ->
+    query = @state.query.replace(" ", "+")
+    rootUrl = "//www.ncbi.nlm.nih.gov/pubmed"
+    url = "#{rootUrl}/?term=#{query}"
+    url = "//www.ncbi.nlm.nih.gov/pubmed?myncbishare=umochsclib&dr=abstract" if query is ""
+    url
+
   onLabChange: (e) ->
     labs = e.split("&&")
     labs = [] if e is ""
@@ -98,7 +105,10 @@ Table = ReactBootstrap.Table
       <div key="WK" className={if @state.currentTab is 3 then "on-top" else "make-clear" }>
         <EmbeddedPage url={this.getWikipediaUrl()} />
       </div>
-      <div key="labs" className={if @state.currentTab is 4 then "on-top" else "make-clear" }>
+      <div key="PM" className={if @state.currentTab is 4 then "on-top" else "make-clear" }>
+        <EmbeddedPage url={this.getPubMedUrl()} />
+      </div>
+      <div key="labs" className={if @state.currentTab is 5 then "on-top" else "make-clear" }>
         <div className="lab-search container">
           <div className="row">
             <div className="col-md-12 lab-select-container">
