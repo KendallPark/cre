@@ -12,6 +12,8 @@ Table = ReactBootstrap.Table
 
   getInitialState: ->
     currentLabs: []
+    currentDrugs: []
+    drugInfoByName: {}
 
   getStateFromFlux: ->
     f = @getFlux()
@@ -59,6 +61,42 @@ Table = ReactBootstrap.Table
     labs = [] if e is ""
     @setState { currentLabs: labs }
 
+  onDrugChange: (e) ->
+    drugs = e.split("&&")
+    drugs = [] if e is ""
+    if drugs.length > 0 and not @state.drugInfoByName[drugs[drugs.length - 1]]?
+      @getDrugInfo(drugs[drugs.length - 1])
+    @setState { currentDrugs: drugs }
+
+  getDrugInfo: (drugName) ->
+    $.ajax
+      type: 'GET'
+      url: """https://api.fda.gov/drug/label.json?search=generic_name:#{drugName}&limit=1"""
+      success: (results) =>
+        toChange = {}
+        toChange[drugName] = { $set: results.results[0] }
+        newState = React.addons.update @state.drugInfoByName, toChange
+        @setState { drugInfoByName: newState }
+      failure: (error) ->
+        return
+
+  drugOptions: (input, callback) ->
+    return if input.length is 0
+    searchTerm = input
+    searchTerm = searchTerm.replace(" ", "%20")
+    $.ajax
+      type: 'GET'
+      url: """https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:"#{searchTerm}"&count=patient.drug.openfda.generic_name&limit=1000"""
+      success: (results) ->
+        callback null,
+          options: _.map results.results, (result) ->
+            { value: result.term, label: result.term }
+          complete: true
+      failure: (error) ->
+        callback error, null
+        return
+
+
   render: ->
     acronyms = _.invert @props.labs.acronyms
     labOptions = _.map _.keys(@props.labs.labs), (lab) ->
@@ -91,6 +129,48 @@ Table = ReactBootstrap.Table
             </tbody>
           </Table>
         </Panel>
+
+    drugPanels = []
+    _.each @state.currentDrugs, (drugName, i) =>
+      drugData = @state.drugInfoByName[drugName]
+      if drugData
+        console.log drugData
+        description = drugData.description || ["Not Found"]
+        indications = drugData.indications_and_usage || ["Not Found"]
+        mechanism = drugData.mechanism_of_action || ["Not Found"]
+        reactions = drugData.adverse_reactions_table || ["Not Found"]
+        generic_name = drugData.openfda.generic_name || ["Not Found"]
+        brand_name = drugData.openfda.brand_name || ["Not Found"]
+        route = drugData.openfda.route || ["Not Found"]
+        pharm_class_epc = drugData.openfda.pharm_class_epc || ["Not Found"]
+        drugPanels.push <Panel header={drugName} eventKey={"#{i}"} key={i}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Generic Name</th>
+                  <th>Brand Name</th>
+                  <th>Route</th>
+                  <th>Pharm Class</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{generic_name.join(', ')}</td>
+                  <td>{brand_name.join(', ')}</td>
+                  <td>{route.join(', ')}</td>
+                  <td>{pharm_class_epc.join(', ')}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>Description</h3>
+            <p>{description[0]}</p>
+            <h3>Indications and Usage</h3>
+            <p>{indications[0]}</p>
+            <h3>Mechanism</h3>
+            <p>{mechanism[0]}</p>
+            <h3>Adverse Reactions</h3>
+            <div dangerouslySetInnerHTML={{__html: reactions[0]}} />
+          </Panel>
 
     <div>
       <div key="UTD" className={if @state.currentTab is 0 then "on-top" else "make-clear" }>
@@ -128,6 +208,31 @@ Table = ReactBootstrap.Table
             <div className="col-md-12">
               <Accordion defaultActiveKey='0'>
                 {panels}
+              </Accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div key="drugs" className={if @state.currentTab is 6 then "on-top" else "make-clear" }>
+        <div className="lab-search container">
+          <div className="row">
+            <div className="col-md-12 lab-select-container">
+              <Select
+                ref="labSelect"
+                className="col-md-12 no-padding"
+                value={this.state.currentLabs}
+                delimiter="&&"
+                multi={true}
+                placeholder="search drugs"
+                asyncOptions={this.drugOptions}
+                onChange={this.onDrugChange} />
+              <p className="labs-source">Source: <a  target="_blank" href="https://open.fda.gov/">OpenFDA</a></p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <Accordion defaultActiveKey='0'>
+                {drugPanels}
               </Accordion>
             </div>
           </div>
