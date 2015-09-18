@@ -13,6 +13,7 @@ Table = ReactBootstrap.Table
   getInitialState: ->
     currentLabs: []
     currentDrugs: []
+    currentPharm: []
     drugInfoByName: {}
 
   getStateFromFlux: ->
@@ -68,6 +69,11 @@ Table = ReactBootstrap.Table
       @getDrugInfo(drugs[drugs.length - 1])
     @setState { currentDrugs: drugs }
 
+  onPharmChange: (e) ->
+    drugs = e.split("&&")
+    drugs = [] if e is ""
+    @setState { currentPharm: drugs }
+
   getDrugInfo: (drugName) ->
     $.ajax
       type: 'GET'
@@ -97,20 +103,11 @@ Table = ReactBootstrap.Table
         callback error, null
         return
 
-
-  render: ->
-    acronyms = _.invert @props.labs.acronyms
-    labOptions = _.map _.keys(@props.labs.labs), (lab) ->
-      acron = acronyms[lab] || ""
-      acron = " (#{acron})" if acron isnt ""
-
-      value: lab
-      label: "#{lab}#{acron}"
-
+  getLabPanels: (labs) ->
     panels = []
-    _.each @state.currentLabs, (lab, i) =>
+    _.each labs, (lab, i) =>
       labData = @props.labs.labs[lab]
-      panels.push <Panel header={lab} eventKey={"#{i}"} key={i}>
+      panels.push <Panel header={lab} eventKey={"lab_#{i}"} key={i}>
           <Table>
             <thead>
               <tr>
@@ -130,12 +127,13 @@ Table = ReactBootstrap.Table
             </tbody>
           </Table>
         </Panel>
+    panels
 
-    drugPanels = []
-    _.each @state.currentDrugs, (drugName, i) =>
+  getDrugPanels: (drugs) ->
+    panels = []
+    _.each drugs, (drugName, i) =>
       drugData = @state.drugInfoByName[drugName]
       if drugData
-        console.log drugData
         description = drugData.description || ["Not Found"]
         indications = drugData.indications_and_usage || ["Not Found"]
         mechanism = drugData.mechanism_of_action || ["Not Found"]
@@ -144,7 +142,7 @@ Table = ReactBootstrap.Table
         brand_name = drugData.openfda.brand_name || ["Not Found"]
         route = drugData.openfda.route || ["Not Found"]
         pharm_class_epc = drugData.openfda.pharm_class_epc || ["Not Found"]
-        drugPanels.push <Panel header={drugName} eventKey={"#{i}"} key={i}>
+        panels.push <Panel header={drugName} eventKey={"#{i}"} key={i}>
             <table className="table">
               <thead>
                 <tr>
@@ -172,6 +170,61 @@ Table = ReactBootstrap.Table
             <h3>Adverse Reactions</h3>
             <div dangerouslySetInnerHTML={{__html: reactions[0]}} />
           </Panel>
+    panels
+
+  getPharmPanels: (drugs) ->
+    panels = []
+    _.each drugs, (drugName, i) =>
+      console.log drugName
+      drugData = @props.pharm[drugName]
+      console.log drugData
+      if drugData
+        features = []
+        _.each _.omit(drugData.features, ["Class", "Similar Drug(s)"]), (description, feature) ->
+          features.push <h4>{feature}</h4>
+          features.push <p>{description}</p>
+        panels.push <Panel header={drugName} eventKey={"drug_#{i}"} key={i}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th></th>
+                <th>Class</th>
+                <th>Similar Drug(s)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{drugData.category}</td>
+                <td>{drugData.subcategory}</td>
+                <td>{drugData.features.Class}</td>
+                <td>{drugData.features["Similar Drug(s)"]}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="drug-features">
+            {features}
+          </div>
+        </Panel>
+    panels
+
+  render: ->
+    acronyms = _.invert @props.labs.acronyms
+    labOptions = _.map _.keys(@props.labs.labs), (lab) ->
+      acron = acronyms[lab] || ""
+      acron = " (#{acron})" if acron isnt ""
+
+      value: lab
+      label: "#{lab}#{acron}"
+
+    pharmOptions = _.map _.keys(@props.pharm), (drug) ->
+      value: drug
+      label: drug
+
+    labPanels = @getLabPanels(@state.currentLabs)
+    # drugPanels = @getDrugPanels(@state.currentDrugs)
+    pharmPanels = @getPharmPanels(@state.currentPharm)
+
 
     <div>
       <div key="UTD" className={if @state.currentTab is 0 then "on-top" else "make-clear" }>
@@ -208,7 +261,7 @@ Table = ReactBootstrap.Table
           <div className="row">
             <div className="col-md-12">
               <Accordion defaultActiveKey='0'>
-                {panels}
+                {labPanels}
               </Accordion>
             </div>
           </div>
@@ -221,19 +274,19 @@ Table = ReactBootstrap.Table
               <Select
                 ref="drugSelect"
                 className="col-md-12 no-padding"
-                value={this.state.currentDrugs}
+                value={this.state.currentPharm}
                 delimiter="&&"
                 multi={true}
                 placeholder="search drugs"
-                asyncOptions={this.drugOptions}
-                onChange={this.onDrugChange} />
-              <p className="labs-source">Source: <a  target="_blank" href="https://open.fda.gov/">OpenFDA</a></p>
+                options={pharmOptions}
+                onChange={this.onPharmChange} />
+              <p className="labs-source">Source: <a  target="_blank" href="http://www.amazon.com/gp/product/0702059579">Rang &amp; Dales Pharmacology Flash Cards Updated Edition</a></p>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12">
               <Accordion defaultActiveKey='0'>
-                {drugPanels}
+                {pharmPanels}
               </Accordion>
             </div>
           </div>
