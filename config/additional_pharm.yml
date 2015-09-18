@@ -1,0 +1,101 @@
+---
+Cephalosporins, Third Generation, IV (cefoperazone, cefotaxime, ceftazidimine, ceftizoxime, ceftriaxone) [antibacterial agents]:
+  :card_id: 'K.01'
+  :name: Cephalosporins, Third Generation, IV
+  :category: Antibacterial agents
+  :subcategory:
+  :features:
+    Class: Broad-spectrum antibiotic
+    Actions: Bactericidal; interferes with cell wall synthesis in dividing bacteria
+    MOA: β-lactam bactericidal antimicrobials; these drugs bind to and inhibit,
+      transpedtidases, which catalyze the cross-linking of peptidoglycans in the final
+      step of bacterial cell wall synthesis. Relatively resisitent to most (but not all!)
+      β-lactamases.
+    Abs/Distrib/Elim: Given by IV injection
+    Clinical use: Meningitis and sepsis
+    Adverse effects: 'Allergice reactions: the widely quoted 10-15% cross-allergy with
+      penicillins is now known to be overstated. Only first-generations exhibit
+      significant cross-allergy with penicillins, which is estimated to be around 1-2%.'
+    Special points: Third generation has very broad gram-negative coverage, efficiently
+      cross BBB. Some agents include excellent coverage of Pseudomonas (e.g. ceftazimine),
+      but also exhibit reduced activity against gram-positives.
+    Similar drug(s): cefoperazone, cefotaxime, ceftazidimine, ceftizoxime, ceftriaxone
+Bosentan (Tracleer) [Pulmonary]:
+  :card_id: 'K.02'
+  :name: Bosentan (Tracleer)
+  :category: Vasodilator
+  :subcategory:
+  :features:
+    Class: Pulmonary
+    Actions: Anti-HTN
+    MOA: Competitively inhibit endothelin-1 receptor = vasodilation (especially in
+      pulmonary circulation)
+    Clinical use: Pumonary arterial hypertension (PAH)
+    Adverse effects: Headache, facial flushing, leg edema. Hepatitis (especially at higher
+      doses). Terratogenic.
+Sildenafil [Pulmonary]:
+  :card_id: 'K.03'
+  :name: Sildenafil
+  :category: Pulmonary
+  :subcategory:
+  :features:
+    Class: phosphodiesterase (PDE) V inhibitor
+    Similar drug(s): tadalafil, vardenafil
+    Actions: Relaxes the non-vascular smooth muscle of the copora cavernosa. Blood
+      at virtually arterial pressure then flows into the cavenosa sinuses resulting
+      in swelling and erection of the penis.
+    MOA: It inhibits phosphodiesterase type V – an enzyme that normally converts cGMP
+      to 5’-GMP This increases the concentration of cGMP which inhibits the contractile
+      mechanisms of the muscle allowing relaxation (see front of card). Given orally,
+      peak action occurs in 30–120min.
+    Clinical use: Pulmonary arterial hypertension (PAH)
+    Adverse effects: These are due to the action of the drug on other vascular beds
+      and include fall in blood pressure, headache and flushing.
+    Special points: The drugs increase the action of the organic nitrates which also
+      work by increasing cGMP
+Mifepristone [reproductive system]:
+  :card_id: 'K.04'
+  :name: Mifepristone
+  :category: Reproductive System
+  :subcategory: Female
+  :features:
+    Class: synthetic, steroidal antiprogestogen and antiglucocorticoid
+    Actions: Used for abortion (sloughs off endometrial lining).
+    MOA: Competitive antagonist at progesterone receptor.
+    Clinical use: used as an abortifacient in the first months of pregnancy, and in
+      smaller doses as an emergency contraceptive.
+    Adverse effects: Can't find any...
+Meloxicam [Inflammation and anti-inflammatory drugs]:
+  :card_id: 'K.05'
+  :name: Meloxicam
+  :category: Inflammation and anti-inflammatory drugs
+  :subcategory:
+  :features:
+    Class: nonsteroidal anti-inflammatory drug (NSAID)
+    Similar drug(s): piroxicam
+    Actions: Anti-inflammatory, analgesic, antipyretic
+    MOA: Meloxicam blocks cyclooxygenase (COX), the enzyme responsible for converting
+      arachidonic acid into prostaglandin H2—the first step in the synthesis of
+      prostaglandins, which are mediators of inflammation. Meloxicam has been shown,
+      especially at its low therapeutic doses, selectively to inhibit COX-2 over COX-1.
+    Clinical use: Pulmonary arterial hypertension (PAH)
+    Adverse effects: gastrointestinal toxicity and bleeding, headaches, rash, and very
+      dark or black stool. Heart attack and stroke. It has fewer gastrointestinal side
+      effects than diclofenac,
+      piroxicam, naproxen, and perhaps all other NSAIDs which are not COX-2 selective.
+Rho(D) immune globulin [Drugs affecting the immune response]:
+  :card_id: 'K.06'
+  :name: Rho(D) immune globulin
+  :category: Drugs affecting the immune response
+  :subcategory:
+  :features:
+    Class: Anti-Rho immunoglobin
+    Actions: Prevents Rh-hemolytic disease of newborn
+    MOA: Bind Rho antigens and prevents antibody formation
+    Clinical use: Prevents Rh-hemolytic disease of newborn
+    Special points: 'The following females are NOT candidates for RhIG:
+      1) D-negative females whose fetus is known to be D-negative,
+      2) D-negative females who have been previously alloimmunized to D (they have an
+      anti-D antibody),
+      3) Any D-positive females (women who test positive for the weak D phenotype
+      should be considered D-positive and not receive RhIG).'
