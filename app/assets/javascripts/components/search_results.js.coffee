@@ -82,6 +82,7 @@ Table = ReactBootstrap.Table
 
   drugOptions: (input, callback) ->
     return if input.length is 0
+    return if typeof input is "object"
     searchTerm = input
     searchTerm = searchTerm.replace(" ", "%20")
     $.ajax
@@ -218,9 +219,9 @@ Table = ReactBootstrap.Table
           <div className="row">
             <div className="col-md-12 lab-select-container">
               <Select
-                ref="labSelect"
+                ref="drugSelect"
                 className="col-md-12 no-padding"
-                value={this.state.currentLabs}
+                value={this.state.currentDrugs}
                 delimiter="&&"
                 multi={true}
                 placeholder="search drugs"
