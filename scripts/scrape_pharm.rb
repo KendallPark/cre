@@ -103,7 +103,7 @@ class Scraper
           features = scrape_back(card)
           key = "#{current[:name].downcase}"
           key += " (#{features['Similar drug(s)'].downcase})" if features['Similar drug(s)']
-          key += " [#{current[:category].downcase}]"
+          key += " [#{current[:category]}]"
           cards[key] = current.merge({features: features}) if !features.empty?
           current = nil
         else
