@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
+  get 'offcampus' => 'welcome#index', off_campus: true
+
   root 'welcome#index'
 
   # Example of regular route:
